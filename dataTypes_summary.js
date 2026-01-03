@@ -25,3 +25,27 @@ const my = function (){
 
 console.log(typeof heros)
 //JS is dynamically typed language
+
+
+
+
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//Stack(Primitive:We get copy) Memory and Heap(Non-Primitive: we get reference) Memory
+
+
+let myYoutubename = "hitesh"
+let anotherName = myYoutubename
+anotherName="satyam"
+console.log(myYoutubename)
+console.log(anotherName)
+
+let userOne = {
+    email:"user@google.com",
+    upi:"user@ybl"
+}
+let userTwo = userOne
+userTwo.email="sachin@gmail.com"
+console.log(userOne)
+console.log(userTwo)
