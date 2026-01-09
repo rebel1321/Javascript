@@ -13,6 +13,7 @@ const all =[...myHeros,...ourHeros]
 
 
 const another = [1,3,4,65,[4,56,6],5,[6,[4,3]]]
+console.log(another);
 
 const real = another.flat(Infinity)
 console.log(real);
