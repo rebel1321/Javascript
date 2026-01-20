@@ -41,7 +41,7 @@ chai2()
 // const add = (num1,num2)=>( num1+num2)
 const add = (num1,num2)=> ({user:"hitesh"})
 
-// console.log(add(4,8));
+console.log(add(4,8));
 
 const myArr = [6,9,9,54]
 
