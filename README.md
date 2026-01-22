@@ -1,7 +1,7 @@
 # Javascript
 Learning 
 
-How Js work bts
+ How Js work bts
 
 Global Execution context
 Function Execution Context
