@@ -7,7 +7,6 @@ Global Execution context
 Function Execution Context
 Eval execution context
 
-
 Memory creation phase - Execution phase
 
 GLobal Execution phase(this) ->  Memory Phase -> Execution phase
