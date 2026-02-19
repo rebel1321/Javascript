@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #212121;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .profile-card {
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #4a90e2;
+            margin: 0 auto 20px;
+            display: block;
+            box-shadow: 0 5px 20px rgba(74, 144, 226, 0.3);
+        }
+        .name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4a90e2;
+        }
+        .username {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        .bio {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a90e2;
+            display: block;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        .info {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .info-item span {
+            margin-right: 10px;
+            color: #4a90e2;
+        }
+        .link-button {
+            display: inline-block;
+            background-color: #4a90e2;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .link-button:hover {
+            background-color: #357abd;
+        }
+    </style>
+</head>
+<body>
+      <!-- 0	UNSENT	Client has been created. open() not called yet.
+1	OPENED	open() has been called.
+2	HEADERS_RECEIVED	send() has been called, and headers and status are available.
+3	LOADING	Downloading; responseText holds partial data.
+4	DONE	The operation is completed -->
+    <div id="profileContainer"></div>
+</body>
+<script>
+    const requestUrl = 'https://api.github.com/users/hiteshchoudhary'
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', requestUrl)
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState);
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(this.responseText)
+            console.log(typeof data);
+            console.log(data.followers);
+            
+            // Create profile card
+            const profileCard = `
+                <div class="profile-card">
+                    <img src="${data.avatar_url}" alt="${data.name}" class="avatar">
+                    <div class="name">${data.name || 'No Name'}</div>
+                    <div class="username">@${data.login}</div>
+                    <div class="bio">${data.bio || 'No bio available'}</div>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-value">${data.public_repos}</span>
+                            <span class="stat-label">Repos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">${data.followers}</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">${data.following}</span>
+                            <span class="stat-label">Following</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info">
+                        ${data.location ? `<div class="info-item"><span>📍</span> ${data.location}</div>` : ''}
+                        ${data.blog ? `<div class="info-item"><span>🔗</span> <a href="${data.blog}" target="_blank" style="color: #4a90e2; text-decoration: none;">${data.blog}</a></div>` : ''}
+                        ${data.twitter_username ? `<div class="info-item"><span>🐦</span> @${data.twitter_username}</div>` : ''}
+                    </div>
+                    
+                    <a href="${data.html_url}" target="_blank" class="link-button">View GitHub Profile</a>
+                </div>
+            `;
+            
+            document.getElementById('profileContainer').innerHTML = profileCard;
+        }
+    }
+    xhr.send();
+</script>
+</html>
