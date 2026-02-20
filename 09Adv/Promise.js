@@ -64,7 +64,6 @@ const promiseFive = new Promise(function(resolve,reject){
         }
     },1000)
 })
-
 async function consFive() {
 
     try {
